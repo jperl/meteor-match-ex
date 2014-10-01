@@ -1,7 +1,7 @@
 Package.describe({
   name: 'jonperl:match-ex',
   summary: 'Additional match patterns.',
-  version: '0.1.0',
+  version: '0.1.1',
   git: 'https://github.com/jperl/meteor-match-ex.git'
 });
 
