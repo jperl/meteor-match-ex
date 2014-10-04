@@ -1,7 +1,7 @@
 Package.describe({
   name: 'jonperl:match-ex',
   summary: 'Additional match patterns.',
-  version: '0.1.1',
+  version: '0.1.2',
   git: 'https://github.com/jperl/meteor-match-ex.git'
 });
 
@@ -16,7 +16,7 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function (api) {
-  api.use(['underscore', 'ejson', 'tinytest']);
+  api.use(['underscore', 'ejson', 'tinytest', 'jonperl:match-ex']);
 
   api.addFiles('match_ex_tests.js', ['web', 'server']);
 });

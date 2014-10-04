@@ -15,6 +15,7 @@ var invalidEmails = ['.com', '@perl.com', 'jon@perl.', 'jon@perl', 'jon@.com'];
 
 Tinytest.add('MatchEx.Email allows valid emails only', function (test) {
   check('mr@perl.com', MatchEx.Email());
+  check('mr..m@perl.com', MatchEx.Email());
 
   _.each(invalidEmails, function (invalidUrl) {
     test.throws(function () {
