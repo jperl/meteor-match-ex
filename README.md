@@ -2,7 +2,7 @@
 -------
 Additional match patterns for meteor.
 
-**Install `meteor add jonperl:match-ex`**
+**Install `meteor add jperl:match-ex`**
 
 
 ## AlphaNumeric
