@@ -24,6 +24,18 @@ Tinytest.add('MatchEx.Email allows valid emails only', function (test) {
   });
 });
 
+Tinytest.add('MatchEx.Function allows functions only', function (test) {
+  check(function () {}, MatchEx.Function());
+
+  test.throws(function () {
+    check('1', MatchEx.Function());
+  });
+
+  test.throws(function () {
+    check(new Date(), MatchEx.Function());
+  });
+});
+
 Tinytest.add('MatchEx.Date allows values that are valid dates', function (test) {
   check('2014-01-20', MatchEx.Date());
 

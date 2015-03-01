@@ -38,11 +38,29 @@ MatchEx.Email = function (optional) {
   });
 };
 
+MatchEx.Function = function (optional) {
+  return Match.Where(function (x) {
+    if (optional && nullOrUndefined(optional)) return true;
+
+    return x instanceof Function;
+  });
+};
+
 MatchEx.OneOf = function (values, optional) {
   return Match.Where(function (value) {
     if (optional && nullOrUndefined(value)) return true;
 
     return _.contains(values, value);
+  });
+};
+
+MatchEx.String = function (minChar, maxChar) {
+  return Match.Where(function (str) {
+    if (typeof str !== 'string') return false;
+
+    if (minChar && str.length < minChar) return false;
+
+    return !(maxChar && str.length > maxChar);
   });
 };
 
@@ -53,16 +71,5 @@ MatchEx.Url = function (optional, ignoreProtocol) {
 
     var urlRegex = /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
     return urlRegex.test(url);
-  });
-};
-
-MatchEx.String = function (minChar, maxChar) {
-  return Match.Where(function (str) {
-    if (typeof str !== 'string') return false;
-
-    if (minChar && str.length < minChar) return false;
-    if (maxChar && str.length > maxChar) return false;
-
-    return true;
   });
 };
